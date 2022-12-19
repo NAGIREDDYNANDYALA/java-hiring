@@ -2,19 +2,20 @@ pipeline {
     agent any
 
     stages {
-        stage('Git Checkout') {
-            steps {
-                git branch: 'main', credentialsId: 'siva-credentials', url: 'https://github.com/NAGIREDDYNANDYALA/java-hiring'
-            }
-        }
-        
+       
          stage('Maven Build') {
+             when {
+                 branch 'develop'
+             }
             steps {
                 sh "mvn clean package"
             }
         }
         
-        stage('Tomcat Deploy') {
+        stage('Tomcat Deploy - Dev') {
+            when {
+                 branch 'develop'
+             }
             steps {
                 sshagent(['tomcat-creds']) {
                      sh "scp -o StrictHostKeyChecking=no target/*.war ec2-user@172.31.44.228:/opt/tomcat9/webapps"
