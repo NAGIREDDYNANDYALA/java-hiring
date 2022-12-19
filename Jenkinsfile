@@ -12,7 +12,7 @@ pipeline {
             }
         }
         
-         stage('Tomcat Deploy - Dev') {
+         stage ('Tomcat Deploy - Dev') {
             when {
                  branch 'develop'
              }
