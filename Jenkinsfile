@@ -17,8 +17,7 @@ pipeline {
                  branch 'develop'
              }
             steps {
-                sshagent(['tomcat-creds']) {
-                      echo "Deploying into dev"
+                  echo "Deploying into dev"
             }
         }
         stage('Tomcat Deploy - Prod') {
@@ -26,9 +25,9 @@ pipeline {
                  branch 'main'
              }
             steps {
-                echo "Deploying into production"
+                echo "Deploying to production"
             }
         }
     }
 }
-}
+
